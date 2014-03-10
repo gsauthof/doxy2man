@@ -40,7 +40,7 @@ struct doxy2man {
 };
 
 const char doxy2man::name[] = "doxy2man";
-const char doxy2man::ver[] = "0.1";
+const char doxy2man::ver[] = "0.2";
 
 enum Direction { DIR_NONE, DIR_IN, DIR_OUT };
 
