@@ -21,9 +21,14 @@ information, brief and detailed descriptions, etc.
 
 ## Compile
 
-Doxy2man is written in C++ and uses the [Qt][2] library (I tested it with version 4.8). You can build it like this:
+Doxy2man is written in C++ and uses the [Qt][2] library (I tested it with version 4.8 and 5.2). You can build it like this:
 
     $ qmake-qt4
+    $ make
+
+Or:
+
+    $ qmake-qt5
     $ make
 
 ## Usage
@@ -79,13 +84,25 @@ Doxy2man implements several useful defaults but is also customizable:
             --pkg STR        man page header/footer string, e.g. 'Linux Programmer's Manual'
     -i STR, --include STR    include path prefix
 
-## Contact ##
+## Contact
 
 Georg Sauthoff <mail@georg.so>
 
 Don't hesitate to mail questions, comments or other feedback.
 
-## License ##
+## Tested platforms
+
+Qt libraries:
+
+- Qt 4.8
+- Qt 5.2
+
+Operating systems:
+
+- Fedora Linux 17, 19 (x86/64)
+- Solaris 10/SPARC
+
+## License
 
 GPLv3+
 
