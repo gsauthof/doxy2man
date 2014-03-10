@@ -357,8 +357,9 @@ struct Header {
   void sort(const Options &o)
   {
     functions_sorted = functions;
-    if (o.enable_sort)
+    if (o.enable_sort) {
       qSort(functions_sorted.begin(), functions_sorted.end());
+    }
   }
   void check(ostream &o)
   {
@@ -519,6 +520,7 @@ QStringList extract_authors(const QVector<Function> &functions)
   // list.sort();
   // QStringList::iterator end = unique(list.begin(), list.end());
   list.removeDuplicates();
+  list.sort();
   return list;
 }
 
@@ -613,8 +615,8 @@ void print_man_summary(QTextStream &o, const Header &h, const Options &opts)
   o << ".RS\n"; // move left margin to the right
   o << ".nf\n"; // no filling of output lines
   o << "\\fB\n"; // font to bold face
-  size_t w = get_type_width(h.functions);
-  foreach (const Function &f, h.functions) {
+  size_t w = get_type_width(h.functions_sorted);
+  foreach (const Function &f, h.functions_sorted) {
     o << fill_right(f.type, w) << f.name << "(";
     QVectorIterator<Parameter> i(f.parameters);
     if (i.hasNext())
