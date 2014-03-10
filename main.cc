@@ -37,10 +37,16 @@ ostream &operator<<(ostream &o, const QString &q)
 struct doxy2man {
   static const char name[];
   static const char ver[];
+  static const char author[];
+  static const char mail[];
+  static const char date[];
 };
 
 const char doxy2man::name[] = "doxy2man";
 const char doxy2man::ver[] = "0.2";
+const char doxy2man::author[] = "Georg Sauthoff";
+const char doxy2man::mail[] = "mail@georg.so";
+const char doxy2man::date[] = "2014-03-10";
 
 enum Direction { DIR_NONE, DIR_IN, DIR_OUT };
 
@@ -216,6 +222,9 @@ struct Options {
       "        --short-pkg STR  short man page header/footer string, e.g. 'Linux'\n"
       "        --pkg STR        man page header/footer string, e.g. 'Linux Programmer's Manual'\n"
       "-i STR, --include STR    include path prefix\n"
+      "\n"
+         "Version: " << doxy2man::name << " " << doxy2man::ver << "\n"
+      << "Author : " << doxy2man::author << " <" << doxy2man::mail << ">, (" << doxy2man::date << ")\n"
       << "\n";
   }
   void check_input_filename()
