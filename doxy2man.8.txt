@@ -1,11 +1,20 @@
-doxy2man
-========
+doxy2man(8)
+===========
+:doctype: manpage
+:man source: doxy2man
 
-Create man pages from doxygen XML output.
 
-## Rationale
+NAME
+----
+doxy2man - Create man pages from doxygen XML output.
 
-[Doxygen][1] is great for generating HTML based API documentation. But the man
+SYNOPSIS
+--------
+*doxy2man* ['OPTIONS']
+
+DESCRIPTION
+-----------
+Doxygen is great for generating HTML based API documentation. But the man
 page output mode of doxygen (`GENERATE_MAN = YES`) is not that awesome. Doxygen
 generates for a header file a man page with all functions, enums etc. For each
 structure it generates a man page listing all its (public) attributes.  For C
@@ -18,25 +27,8 @@ man page. The output is optimized for C projects. It supports the most common
 doxygen features, e.g. implicit and explicit see also tags, copyright, author
 information, brief and detailed descriptions, etc.
 
-
-## Compile
-
-Doxy2man is written in C++ and uses the [Qt][2] library (I tested it with version 4.8 and 5.2). You can build it like this:
-
-    $ qmake-qt4
-    $ make
-
-Or:
-
-    $ qmake-qt5
-    $ make
-
-To build the manpage use:
-
-    $ make doxy2man.8
-
-## Usage
-
+USAGE
+-----
 Create a small Doxygen configuration file. To enable XML output use something like this:
 
     GENERATE_XML           = YES
@@ -62,7 +54,9 @@ View the man pages:
     $ man -l out/my_func_b.3
     ...
 
-## Options
+
+OPTIONS
+-------
 
 Doxy2man implements several useful defaults but is also customizable:
 
@@ -88,31 +82,18 @@ Doxy2man implements several useful defaults but is also customizable:
             --pkg STR        man page header/footer string, e.g. 'Linux Programmer's Manual'
     -i STR, --include STR    include path prefix
 
-## Contact
 
-Georg Sauthoff <mail@georg.so>
+AUTHOR
+------
+
+Written by Georg Sauthoff <mail@georg.so>
 
 Don't hesitate to mail questions, comments or other feedback.
 
-## Tested platforms
-
-Qt libraries:
-
-- Qt 4.8
-- Qt 5.2
-
-Operating systems:
-
-- Fedora Linux 17, 19 (x86/64)
-- Solaris 10/SPARC
-
-## License
+LICENSE
+-------
 
 GPLv3+
 
-
-
-[1]: http://www.stack.nl/~dimitri/doxygen/
-[2]: http://qt.digia.com/
 
 
