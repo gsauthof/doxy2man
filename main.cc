@@ -43,10 +43,10 @@ struct doxy2man {
 };
 
 const char doxy2man::name[] = "doxy2man";
-const char doxy2man::ver[] = "0.2";
+const char doxy2man::ver[] = "0.3";
 const char doxy2man::author[] = "Georg Sauthoff";
 const char doxy2man::mail[] = "mail@georg.so";
-const char doxy2man::date[] = "2014-03-10";
+const char doxy2man::date[] = "2016-08-30";
 
 enum Direction { DIR_NONE, DIR_IN, DIR_OUT };
 
@@ -152,6 +152,7 @@ struct Member {
   QString type;
   QString desc;
   QString brief_desc;
+  QString arg_string;
 };
 
 struct Struct {
@@ -582,7 +583,8 @@ void print_struct(QTextStream &o, const Struct &s)
     size_t w = get_type_width(s.members);
     size_t name_size = max_member_size(s.members);
     foreach (const Member &m, s.members) {
-      o << "  " << fill_right(m.type, w)  << "\\fI" << m.name << "\\fP;";
+      o << "  " << fill_right(m.type, w)  << "\\fI" << m.name << "\\fP"
+        << m.arg_string << ';';
       print_brief(o, name_size, m);
       o << "\n";
     }
@@ -1024,6 +1026,8 @@ class Handler : public QXmlDefaultHandler
         tag = TAG_REF_MEMBER;
       } else
         tag = TAG_REF;
+    } else if (qName == "argsstring") {
+        tag = TAG_ARGSTRING;
     } else {
       tag = TAG_IGNORE;
     }
@@ -1110,6 +1114,10 @@ class Handler : public QXmlDefaultHandler
           f.name = buffer;
         else if (from_top(1,TAG_MEMBERDEF_VAR))
           member.name = buffer;
+        break;
+      case TAG_ARGSTRING:
+        if (from_top(1,TAG_MEMBERDEF_VAR))
+          member.arg_string = buffer;
         break;
       case TAG_MEMBERDEF_FUNC:
         h.functions.push_back(f);
